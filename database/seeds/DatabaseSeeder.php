@@ -9,12 +9,10 @@ class DatabaseSeeder extends Seeder {
 	 * @return void
 	 */
 	public function run() {
-
-		{
-			//factory(App\User::class, 50)->create();
-			factory('App\Thread', 50)->create();
-
-			$threads->each(function ($thread) {factory('App\Reply', 10)->create(['thread_id' => $thread->id]);});
-		}
+		// $this->call(UsersTableSeeder::class);
+		$threads = factory('App\Thread', 50)->create();
+		$threads->each(function ($thread) {
+			factory(\App\Reply::class, 10)->create(['thread_id' => $thread->id]);
+		});
 	}
 }
